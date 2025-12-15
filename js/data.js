@@ -1,36 +1,36 @@
 // Mock Data for Templates
-// Using local assets from cinelove.me directories
+// Using curated Unsplash images specific to VIETNAMESE culture (Ao Dai, Tet, Hoi An, etc.)
 const templates = [
     // Wedding (Thiệp cưới)
     {
         id: 'tpl-wed-01',
-        title: 'Wedding Classic',
+        title: 'Thanh Xuân Của Ta',
         category: 'wedding',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/47b0118b-1f91-4622-8061-f7002f6d5aaf.webp',
-        previewColor: '#1F1B24',
+        image: 'https://images.pexels.com/photos/32774014/pexels-photo-32774014.jpeg', // Couple in Traditional Ao Dai (Red/Gold)
+        previewColor: '#9F1239', // Dark Red
         demoUrl: '#'
     },
     {
         id: 'tpl-wed-02',
-        title: 'Elegant Love',
+        title: 'Chung Tuyến Đường',
         category: 'wedding',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/5a508f27-c1b9-442f-8a28-2aaf51016367.webp',
+        image: 'https://images.pexels.com/photos/19476300/pexels-photo-19476300.jpeg', // Outdoor Wedding in Vietnam
         previewColor: '#2D2833',
         demoUrl: '#'
     },
     {
         id: 'tpl-wed-03',
-        title: 'Save The Date',
+        title: 'Hạnh Phúc Trọn Vẹn',
         category: 'wedding',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/e554cdff-72d4-4657-863a-68cf83b61fe3.webp',
+        image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', // Bridal details (Universal but elegant)
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
     {
         id: 'tpl-wed-04',
-        title: 'We Got Married',
+        title: 'Một Nhà',
         category: 'wedding',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/c1d49baa-0dd0-4f5c-b9c4-52d02ffe53c0.webp',
+        image: 'https://images.pexels.com/photos/3675699/pexels-photo-3675699.jpeg', // Couple holding hands
         previewColor: '#000000',
         demoUrl: '#'
     },
@@ -38,25 +38,25 @@ const templates = [
     // Birthday (Thiệp sinh nhật)
     {
         id: 'tpl-bday-01',
-        title: 'Sinh Nhật Hồng',
+        title: 'Tuổi Mới Rực Rỡ',
         category: 'birthday',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/5cfab020-67dc-4f23-92c1-0b229244b00f.webp',
+        image: 'https://images.pexels.com/photos/3831786/pexels-photo-3831786.jpeg', // Asian girl portrait with flowers/mood
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
     {
         id: 'tpl-bday-02',
-        title: 'Space Party',
+        title: 'Tiệc Vui Bất Tận',
         category: 'birthday',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/6a6b2d79-46ab-4295-813c-eb760c79b222.webp',
+        image: 'https://images.pexels.com/photos/4684265/pexels-photo-4684265.jpeg', // Group party cheering
         previewColor: '#2D2833',
         demoUrl: '#'
     },
     {
         id: 'tpl-bday-03',
-        title: 'Tuổi Mới Rực Rỡ',
+        title: 'Sweet 18',
         category: 'birthday',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/c6238e18-d92b-4eea-ba14-3fe832517e62_1762512018.webp',
+        image: 'https://images.pexels.com/photos/7099979/pexels-photo-7099979.jpeg', // Asian girl with cake
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
@@ -66,15 +66,15 @@ const templates = [
         id: 'tpl-grad-01',
         title: 'Ngày Ra Trường',
         category: 'graduation',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/f4b65e20983dd71aa541.webp',
+        image: 'https://images.pexels.com/photos/22691387/pexels-photo-22691387.png', // Asian Graduates Group
         previewColor: '#2D2833',
         demoUrl: '#'
     },
     {
         id: 'tpl-grad-02',
-        title: 'Tương Lai Tươi Sáng',
+        title: 'Thời Đại Học',
         category: 'graduation',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/47b0118b-1f91-4622-8061-f7002f6d5aaf.webp', // Reuse wedding classic for formal look
+        image: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg', // Vietnamese Students in Uniform/Ao Dai
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
@@ -82,17 +82,17 @@ const templates = [
     // Event (Sự kiện)
     {
         id: 'tpl-evt-01',
-        title: 'Grand Opening',
+        title: 'Hội Nghị Khách Hàng',
         category: 'event',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/e554cdff-72d4-4657-863a-68cf83b61fe3.webp',
+        image: 'https://images.pexels.com/photos/19905203/pexels-photo-19905203.jpeg', // Corporate handshake
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
     {
         id: 'tpl-evt-02',
-        title: 'Year End Party',
+        title: 'Tất Niên Sum Vầy',
         category: 'event',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/5a508f27-c1b9-442f-8a28-2aaf51016367.webp',
+        image: 'https://images.pexels.com/photos/25949481/pexels-photo-25949481.jpeg', // Partying/Cheers (Beer/Wine)
         previewColor: '#2D2833',
         demoUrl: '#'
     },
@@ -100,35 +100,35 @@ const templates = [
     // Anniversary (Kỷ niệm)
     {
         id: 'tpl-ani-01',
-        title: 'Love Story',
+        title: 'Đà Lạt cùng nhau',
         category: 'anniversary',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/c6238e18-d92b-4eea-ba14-3fe832517e62_1762512018.webp',
+        image: 'https://images.pexels.com/photos/3571331/pexels-photo-3571331.jpeg', // Couple in Hoi An/Da Lat style setting
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
     {
         id: 'tpl-ani-02',
-        title: '1 Năm Bên Nhau',
+        title: 'Mãi Mãi Một Tình Yêu',
         category: 'anniversary',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/c1d49baa-0dd0-4f5c-b9c4-52d02ffe53c0.webp',
+        image: 'https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg', // Couple Hug
         previewColor: '#000000',
         demoUrl: '#'
     },
 
-    // Wishes (Lời chúc)
+    // Wishes (Lời chúc -> Vietnamese Holiday Themes)
     {
         id: 'tpl-wish-01',
-        title: 'Lời Chúc 8/3',
+        title: 'Xuân Như Ý',
         category: 'wishes',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/5cfab020-67dc-4f23-92c1-0b229244b00f.webp',
-        previewColor: '#1F1B24',
+        image: 'https://images.pexels.com/photos/19941549/pexels-photo-19941549.jpeg', // Girl in Ao Dai with Flowers (Tet)
+        previewColor: '#9F1239',
         demoUrl: '#'
     },
     {
         id: 'tpl-wish-02',
-        title: 'Merry Christmas',
+        title: 'Giáng Sinh An Lành',
         category: 'wishes',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/5a508f27-c1b9-442f-8a28-2aaf51016367.webp',
+        image: 'https://images.pexels.com/photos/19149264/pexels-photo-19149264.jpeg', // Family/Group at Christmas
         previewColor: '#2D2833',
         demoUrl: '#'
     },
@@ -136,9 +136,9 @@ const templates = [
     // Other (Khác)
     {
         id: 'tpl-other-01',
-        title: 'Cinematic Mood',
+        title: 'Thước Phim Ký Ức',
         category: 'other',
-        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/f4b65e20983dd71aa541.webp',
+        image: 'https://images.pexels.com/photos/1812527/pexels-photo-1812527.jpeg', // Cinematic Silhouette
         previewColor: '#2D2833',
         demoUrl: '#'
     }
