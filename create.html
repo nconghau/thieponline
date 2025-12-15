@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ThiepOnline - Tùy Chỉnh</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,26 +38,48 @@
       }
     }
   </script>
+  <style>
+    /* Custom scrollbar for sidebar */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #18151D;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 3px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  </style>
 </head>
 
-<body class="bg-[#1F1B24] text-gray-100 h-screen flex flex-col overflow-hidden font-sans">
+<body class="bg-[#1F1B24] text-gray-100 h-[100dvh] flex flex-col overflow-hidden font-sans">
 
   <!-- Navbar -->
-  <nav class="flex-none bg-[#1F1B24] border-b border-white/10 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
+  <nav class="flex-none bg-[#1F1B24] border-b border-white/10 z-50 h-14 sm:h-16">
+    <div class="w-full h-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="flex justify-between items-center h-full">
         <a href="index.html" class="flex items-center gap-2 hover:text-primary transition text-gray-400">
-          <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i
-              class="fas fa-arrow-left text-xs"></i></div>
+          <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+            <i class="fas fa-arrow-left text-xs"></i>
+          </div>
           <span class="font-medium hidden sm:block">Quay lại</span>
         </a>
+
         <div
-          class="font-serif font-bold text-xl text-center absolute left-1/2 transform -translate-x-1/2 tracking-wide text-white">
+          class="font-serif font-bold text-lg sm:text-xl text-center absolute left-1/2 transform -translate-x-1/2 tracking-wide text-white">
           Design Studio
         </div>
+
         <div>
           <button id="btn-save"
-            class="bg-gradient-to-r from-primary to-rose-500 hover:from-primary/90 hover:to-rose-500/90 text-white px-6 py-2 rounded-full font-bold transition shadow-lg shadow-primary/20 flex items-center gap-2 text-sm">
+            class="bg-gradient-to-r from-primary to-rose-500 hover:from-primary/90 hover:to-rose-500/90 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full font-bold transition shadow-lg shadow-primary/20 flex items-center gap-2 text-xs sm:text-sm">
             <span>Hoàn Tất</span> <i class="fas fa-check"></i>
           </button>
         </div>
@@ -66,24 +88,68 @@
   </nav>
 
   <!-- Main Workspace -->
-  <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+  <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
 
-    <!-- Controls Sidebar -->
+    <!-- PREVIEW AREA (Responsive Order) -->
+    <!-- Mobile: Top 45vh, Desktop: Right Side Flex-1 -->
     <div
-      class="w-full lg:w-96 bg-[#18151D] border-r border-white/5 flex flex-col h-1/2 lg:h-full z-20 shadow-2xl overflow-y-auto">
-      <div class="p-6 space-y-8">
+      class="order-1 lg:order-2 w-full h-[45vh] lg:h-full lg:flex-1 bg-[#0F0D11] relative flex items-center justify-center p-4 lg:p-10 overflow-hidden border-b border-white/10 lg:border-b-0"
+      id="preview-container">
+
+      <!-- Background Decoration -->
+      <div class="absolute inset-0 z-0 opacity-30 pointer-events-none" id="preview-bg-pattern">
+        <div
+          class="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-float">
+        </div>
+        <div
+          class="absolute bottom-0 right-0 w-96 h-96 bg-rose-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-float"
+          style="animation-delay: 2s"></div>
+      </div>
+
+      <!-- Card Container (Scaled for Mobile) -->
+      <div
+        class="relative z-10 w-full max-w-[280px] sm:max-w-sm lg:max-w-md aspect-[3/4] perspective-1000 h-full lg:h-auto flex items-center justify-center">
+        <div id="card-preview"
+          class="w-full h-auto aspect-[3/4] bg-white rounded-lg shadow-2xl relative overflow-hidden transform transition duration-500 border border-white/10 group flex flex-col">
+
+          <!-- Image Layer -->
+          <div class="h-3/5 w-full relative overflow-hidden bg-gray-900">
+            <img id="card-image" src="" class="w-full h-full object-cover opacity-90 transition duration-700"
+              alt="Preview">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+
+          <!-- Content Layer -->
+          <div class="h-2/5 p-4 sm:p-6 flex flex-col items-center justify-center text-center bg-[#2D2833] relative">
+            <h2 id="card-title"
+              class="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 drop-shadow-md tracking-wide line-clamp-2">
+              Tiêu đề</h2>
+            <p id="card-message"
+              class="font-hand text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed overflow-hidden line-clamp-3">
+              Lời nhắn của bạn...
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS SIDEBAR -->
+    <!-- Mobile: Bottom Scrollable Flex-1, Desktop: Left Fixed Width -->
+    <div
+      class="order-2 lg:order-1 w-full lg:w-96 bg-[#18151D] border-r border-white/5 flex flex-col flex-1 lg:h-full z-20 shadow-2xl overflow-y-auto custom-scroll">
+      <div class="p-6 space-y-6 sm:space-y-8 pb-20 lg:pb-6">
 
         <!-- Image Upload -->
         <div>
           <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">1. Hình Ảnh</label>
           <div class="relative group">
             <label for="image-input"
-              class="w-full h-36 border border-dashed border-white/20 bg-white/5 rounded-xl flex flex-col items-center justify-center hover:border-primary/50 hover:bg-white/10 transition cursor-pointer"
+              class="w-full h-24 sm:h-36 border border-dashed border-white/20 bg-white/5 rounded-xl flex flex-col items-center justify-center hover:border-primary/50 hover:bg-white/10 transition cursor-pointer"
               id="upload-trigger-label">
-              <i class="fas fa-image text-3xl text-gray-500 group-hover:text-primary mb-3 transition"></i>
-              <span class="text-sm text-gray-400 group-hover:text-primary font-medium">Tải ảnh lên (Max 5MB)</span>
+              <i class="fas fa-image text-2xl sm:text-3xl text-gray-500 group-hover:text-primary mb-2 transition"></i>
+              <span class="text-xs sm:text-sm text-gray-400 group-hover:text-primary font-medium">Tải ảnh lên (Max
+                5MB)</span>
             </label>
-            <!-- Hidden but accessible input -->
             <input type="file" id="image-input" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
               accept="image/*">
           </div>
@@ -92,14 +158,14 @@
         <!-- Text Inputs -->
         <div>
           <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">2. Lời Chúc</label>
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             <div>
               <input type="text" id="input-title" placeholder="Tiêu đề (VD: Happy Birthday)"
-                class="w-full px-4 py-3 bg-[#2D2833] border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
+                class="w-full px-4 py-2 sm:py-3 bg-[#2D2833] border border-white/10 rounded-lg text-white text-sm sm:text-base placeholder-gray-500 focus:outline-none focus:border-primary transition">
             </div>
             <div>
-              <textarea id="input-message" rows="4" placeholder="Nhập lời chúc của bạn ở đây..."
-                class="w-full px-4 py-3 bg-[#2D2833] border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition resize-none"></textarea>
+              <textarea id="input-message" rows="3" placeholder="Nhập lời chúc của bạn ở đây..."
+                class="w-full px-4 py-2 sm:py-3 bg-[#2D2833] border border-white/10 rounded-lg text-white text-sm sm:text-base placeholder-gray-500 focus:outline-none focus:border-primary transition resize-none"></textarea>
             </div>
           </div>
         </div>
@@ -115,7 +181,7 @@
               <i class="fas fa-search"></i>
             </button>
           </div>
-          <div class="space-y-2 overflow-y-auto max-h-60" id="music-list">
+          <div class="space-y-2 overflow-y-auto max-h-48 sm:max-h-60" id="music-list">
             <!-- Music items injected via JS -->
           </div>
         </div>
@@ -142,48 +208,6 @@
       </div>
     </div>
 
-    <!-- Preview Area -->
-    <div class="flex-1 bg-[#0F0D11] relative flex items-center justify-center p-4 lg:p-10 overflow-hidden"
-      id="preview-container">
-      <!-- Background Decoration -->
-      <div class="absolute inset-0 z-0 opacity-30 pointer-events-none" id="preview-bg-pattern">
-        <div
-          class="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-float">
-        </div>
-        <div
-          class="absolute bottom-0 right-0 w-96 h-96 bg-rose-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-float"
-          style="animation-delay: 2s"></div>
-      </div>
-
-      <!-- Card Container -->
-      <div class="relative z-10 w-full max-w-sm lg:max-w-md aspect-[3/4] perspective-1000">
-        <div id="card-preview"
-          class="w-full h-full bg-white rounded-lg shadow-2xl relative overflow-hidden transform transition duration-500 hover:scale-[1.02] border border-white/10 group">
-          <!-- Image Layer -->
-          <div class="h-3/5 w-full relative overflow-hidden bg-gray-900">
-            <img id="card-image" src="" class="w-full h-full object-cover opacity-90 transition duration-700"
-              alt="Preview">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          </div>
-
-          <!-- Content Layer -->
-          <div class="h-2/5 p-6 flex flex-col items-center justify-center text-center bg-[#2D2833] relative">
-            <h2 id="card-title"
-              class="font-serif text-2xl lg:text-3xl font-bold text-white mb-2 drop-shadow-md tracking-wide line-clamp-2">
-              Tiêu đề</h2>
-            <p id="card-message"
-              class="font-hand text-xl lg:text-2xl text-gray-300 leading-relaxed overflow-hidden line-clamp-3">
-              Lời nhắn của bạn...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Preview Helper -->
-  <div class="lg:hidden absolute bottom-4 text-gray-500 text-xs">
-    Kéo xuống để xem thiệp
   </div>
 
   <!-- Loading Overlay -->
@@ -195,11 +219,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <style>
-    .frame-shadow {
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    }
-  </style>
 </body>
 
 </html>

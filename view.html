@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Bạn có một thiệp chúc mừng!</title>
   <meta property="og:title" content="Bạn nhận được một thiệp chúc mừng!">
   <meta property="og:description" content="Nhấn vào để xem lời chúc dành riêng cho bạn.">
@@ -11,7 +11,7 @@
     content="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap"
     rel="stylesheet">
@@ -63,107 +63,132 @@
       background: linear-gradient(135deg, #F472B6 0%, #BE185D 100%);
       box-shadow: 0 4px 10px rgba(190, 24, 93, 0.4);
     }
+
+    /* Hide scrollbar for seamless look */
+    ::-webkit-scrollbar {
+      display: none;
+    }
   </style>
 </head>
 
-<body class="bg-[#1F1B24] h-screen overflow-hidden flex items-center justify-center text-white">
+<body class="bg-[#1F1B24] h-[100dvh] w-full overflow-hidden flex items-center justify-center text-white relative">
 
   <!-- Envelope / Start Screen -->
-  <!-- Envelope / Start Screen -->
   <div id="envelope"
-    class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#1F1B24] cursor-pointer transition duration-1000">
+    class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#1F1B24] cursor-pointer transition duration-1000 p-4">
     <div
-      class="relative w-80 h-56 bg-[#2D2833] rounded-lg shadow-2xl flex items-center justify-center transform transition duration-500 hover:scale-105 envelope-paper border border-white/5">
+      class="relative w-full max-w-xs sm:w-80 h-48 sm:h-56 bg-[#2D2833] rounded-lg shadow-2xl flex items-center justify-center transform transition duration-500 hover:scale-105 envelope-paper border border-white/5">
       <!-- Flap -->
       <div
-        class="absolute -top-14 left-0 w-0 h-0 border-l-[160px] border-l-transparent border-r-[160px] border-r-transparent border-b-[112px] border-b-[#2D2833] filter brightness-110 drop-shadow-lg">
+        class="absolute -top-12 sm:-top-14 left-0 w-0 h-0 border-l-[calc(50vw-2rem)] sm:border-l-[160px] border-l-transparent border-r-[calc(50vw-2rem)] sm:border-r-[160px] border-r-transparent border-b-[96px] sm:border-b-[112px] border-b-[#2D2833] filter brightness-110 drop-shadow-lg pointer-events-none">
       </div>
 
       <!-- Seal -->
       <div
-        class="absolute -top-4 w-12 h-12 rounded-full wax-seal flex items-center justify-center z-20 border-2 border-[#BE185D]">
-        <span class="font-serif text-white font-bold text-lg">C</span>
+        class="absolute -top-3 sm:-top-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full wax-seal flex items-center justify-center z-20 border-2 border-[#BE185D]">
+        <span class="font-serif text-white font-bold text-base sm:text-lg">C</span>
       </div>
 
       <div class="text-3xl animate-bounce mt-8 opacity-50">💌</div>
     </div>
-    <p class="mt-12 text-lg font-sans font-light tracking-widest uppercase text-gray-400 animate-pulse">Chạm để mở thiệp
+    <p
+      class="mt-12 text-base sm:text-lg font-sans font-light tracking-widest uppercase text-gray-400 animate-pulse text-center">
+      Chạm để mở thiệp
     </p>
   </div>
 
   <!-- Main Card Container -->
   <div id="card-container"
-    class="opacity-0 transform scale-95 transition duration-1000 relative w-full h-full p-4 flex flex-col items-center justify-center">
+    class="opacity-0 transform scale-95 transition duration-1000 relative w-full h-full flex flex-col items-center justify-center">
 
     <!-- Background Decoration -->
-    <div class="absolute inset-0 z-0 overflow-hidden" id="view-bg">
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" id="view-bg">
       <div
-        class="absolute top-10 left-10 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-float">
+        class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/10 to-transparent mix-blend-screen filter blur-[100px] animate-float">
       </div>
       <div
-        class="absolute bottom-10 right-10 w-96 h-96 bg-rose-600 rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-float"
+        class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-rose-600/10 to-transparent mix-blend-screen filter blur-[100px] animate-float"
         style="animation-delay: 2s"></div>
     </div>
 
-    <!-- The Card -->
+    <!-- The Card Wrapper -->
     <div
-      class="relative bg-white w-full max-w-md aspect-[3/4] rounded-sm shadow-2xl overflow-hidden z-10 animate-card-up flex flex-col border-[12px] border-white">
-      <!-- Card Image -->
-      <div class="h-3/5 w-full relative overflow-hidden bg-gray-200">
-        <img id="view-image" src="" class="w-full h-full object-cover" alt="Card Image">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+      class="relative z-10 w-full max-w-md h-full max-h-[85vh] sm:max-h-[800px] p-6 flex flex-col items-center justify-center">
+
+      <!-- Card Itself -->
+      <div
+        class="w-full relative shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden animate-card-up flex flex-col bg-white border-[8px] sm:border-[12px] border-white aspect-[3/4] sm:aspect-auto sm:h-auto">
+
+        <!-- Card Image -->
+        <div class="h-[55%] sm:h-[60%] w-full relative overflow-hidden bg-gray-200 group">
+          <img id="view-image" src="" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105"
+            alt="Card Image">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+
+        <!-- Card Content -->
+        <div
+          class="h-[45%] sm:h-[40%] p-6 sm:p-8 flex flex-col items-center justify-center text-center bg-white text-gray-900 relative">
+          <!-- Decorative elements -->
+          <div class="absolute top-4 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gray-200"></div>
+
+          <h1 id="view-title"
+            class="font-serif text-2xl sm:text-4xl text-gray-900 mb-2 sm:mb-4 tracking-wide line-clamp-2">Title</h1>
+          <div class="flex-1 flex items-center justify-center w-full">
+            <p id="view-message"
+              class="text-gray-500 text-sm sm:text-lg leading-relaxed font-sans line-clamp-4 break-words px-2">Message
+              Content</p>
+          </div>
+
+          <div class="mt-auto w-12 h-0.5 bg-gray-200"></div>
+        </div>
       </div>
 
-      <!-- Card Content -->
-      <div class="h-2/5 p-8 flex flex-col items-center justify-center text-center bg-white text-gray-900">
-        <h1 id="view-title" class="font-serif text-4xl text-gray-900 mb-4 tracking-wide">Title</h1>
-        <p id="view-message" class="text-gray-500 text-lg leading-relaxed font-sans max-w-[90%]">Message Content</p>
-        <div class="mt-6 w-12 h-0.5 bg-gray-200"></div>
-      </div>class="mt-6 w-12 h-0.5 bg-gray-200">
+      <!-- Action Buttons (Below Card) -->
+      <div class="mt-6 flex gap-3 sm:gap-4 w-full justify-center">
+        <button id="btn-share"
+          class="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-bold shadow-xl hover:bg-gray-100 transition flex items-center justify-center gap-2 text-sm sm:text-base">
+          <i class="fas fa-share-alt text-primary"></i> Chia Sẻ
+        </button>
+        <a href="index.html"
+          class="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold hover:bg-white/20 transition flex items-center justify-center gap-2 text-sm sm:text-base">
+          <i class="fas fa-magic"></i> Tạo Mới
+        </a>
+      </div>
+
     </div>
-  </div>
 
-  <!-- Music Player Control -->
-  <button id="music-toggle"
-    class="absolute top-4 right-4 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full text-white flex items-center justify-center hover:bg-black/40 transition border border-white/20">
-    <i class="fas fa-volume-up"></i>
-  </button>
-  </div>
-
-  <!-- Action Buttons -->
-  <div class="mt-10 flex gap-4 z-20 relative">
-    <button id="btn-share"
-      class="px-8 py-3 bg-white text-gray-900 rounded-full font-bold shadow-xl hover:bg-gray-200 transition flex items-center gap-2">
-      <i class="fas fa-share-alt"></i> Chia Sẻ
+    <!-- Float Music Toggle -->
+    <button id="music-toggle"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-black/30 backdrop-blur-md rounded-full text-white flex items-center justify-center hover:bg-black/50 transition border border-white/10 z-50">
+      <i class="fas fa-volume-up text-sm sm:text-base"></i>
     </button>
-    <a href="index.html"
-      class="px-8 py-3 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold hover:bg-white/20 transition">
-      Tạo Mới
-    </a>
+
   </div>
 
   <!-- Social Share Modal -->
   <div id="share-modal"
-    class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#2D2833] border border-white/10 rounded-2xl p-8 w-full max-w-sm text-center shadow-2xl">
-      <h3 class="text-xl font-bold text-white mb-6">Chia sẻ khoảnh khắc này</h3>
+    class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+    <div
+      class="bg-[#2D2833] border border-white/10 rounded-2xl p-6 sm:p-8 w-full max-w-sm text-center shadow-2xl transform scale-100 transition">
+      <h3 class="text-xl font-bold text-white mb-6 font-serif">Chia sẻ yêu thương</h3>
       <div class="grid grid-cols-3 gap-6 mb-8">
         <a href="#" id="share-fb" target="_blank" class="flex flex-col items-center gap-2 group">
           <div
-            class="w-14 h-14 bg-[#3B5998] rounded-full flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+            class="w-12 h-12 sm:w-14 sm:h-14 bg-[#3B5998] rounded-full flex items-center justify-center text-xl sm:text-2xl text-white shadow-lg group-hover:scale-110 transition">
             <i class="fab fa-facebook-messenger"></i>
           </div>
           <span class="text-xs text-gray-400 group-hover:text-white transition">Messenger</span>
         </a>
         <a href="#" id="share-zalo" target="_blank" class="flex flex-col items-center gap-2 group">
           <div
-            class="w-14 h-14 bg-[#0068FF] rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg group-hover:scale-110 transition">
+            class="w-12 h-12 sm:w-14 sm:h-14 bg-[#0068FF] rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold text-white shadow-lg group-hover:scale-110 transition">
             Z</div>
           <span class="text-xs text-gray-400 group-hover:text-white transition">Zalo</span>
         </a>
         <button id="share-copy" class="flex flex-col items-center gap-2 group">
           <div
-            class="w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+            class="w-12 h-12 sm:w-14 sm:h-14 bg-gray-700 rounded-full flex items-center justify-center text-xl sm:text-2xl text-white shadow-lg group-hover:scale-110 transition">
             <i class="fas fa-link"></i>
           </div>
           <span class="text-xs text-gray-400 group-hover:text-white transition">Copy Link</span>
@@ -172,8 +197,6 @@
       <button onclick="document.getElementById('share-modal').classList.add('hidden')"
         class="w-full py-3 bg-white/5 border border-white/10 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-white/10 transition">Đóng</button>
     </div>
-  </div>
-
   </div>
 
   <audio id="bg-music" loop></audio>
