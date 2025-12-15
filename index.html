@@ -4,7 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThiepOnline - Tạo Thiệp Cinematic</title>
+    <title>ThiepOnline - Tạo Thiệp Online & Chia Sẻ Miễn Phí</title>
+    <meta name="description"
+        content="Tạo thiệp cưới, sinh nhật, sự kiện online nhanh chóng trong vài giây. Miễn phí, không cần cài đặt. Thử ngay tại ThiepOnline!">
+    <meta name="keywords"
+        content="tạo thiệp online, thiệp cưới online, làm thiệp sinh nhật, thiệp điện tử, thiệp mời online miễn phí">
+    <meta name="author" content="ThiepOnline">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thieponline.surge.sh/">
+    <meta property="og:title" content="ThiepOnline - Tạo Thiệp Nhanh Chóng & Miễn Phí">
+    <meta property="og:description"
+        content="Tạo thiệp cưới, sinh nhật, sự kiện online nhanh chóng. Miễn phí, không cần cài đặt.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1511285560982-1356c11d4606?q=80&w=1200">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://thieponline.surge.sh/">
+    <meta property="twitter:title" content="ThiepOnline - Tạo Thiệp Nhanh Chóng & Miễn Phí">
+    <meta property="twitter:description"
+        content="Tạo thiệp cưới, sinh nhật, sự kiện online nhanh chóng. Miễn phí, không cần cài đặt.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1511285560982-1356c11d4606?q=80&w=1200">
+
+    <link rel="canonical" href="https://thieponline.surge.sh/">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
@@ -38,7 +61,7 @@
         }
 
         .hero-glow {
-            background: radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.15) 0%, rgba(31, 27, 36, 0) 70%);
         }
 
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -56,7 +79,7 @@
     </style>
 </head>
 
-<body class="selection:bg-primary selection:text-white">
+<body class="antialiased min-h-screen flex flex-col">
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-[#1F1B24]/90 backdrop-blur-md border-b border-white/5">
@@ -87,13 +110,13 @@
                     chóng</span>
             </div>
             <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
-                Lưu giữ <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-rose-400">Khoảnh
+                Lưu Giữ <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-rose-400">Khoảnh
                     Khắc</span><br>
-                Đậm Chất Điện Ảnh
+                Đầy Cảm Xúc
             </h1>
             <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-12 font-light">
-                Biến những khoảnh khắc đời thường thành thước phim lãng mạn. Tạo thiệp cưới, sinh nhật, kỷ niệm đậm chất
-                điện ảnh.
+                Biến những khoảnh khắc đời thường thành tấm thiệp ý nghĩa. Gửi trọn yêu thương đến người thân và bạn bè
+                hoàn toàn miễn phí.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="#templates"

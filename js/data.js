@@ -136,7 +136,7 @@ const templates = [
     // Other (Khác)
     {
         id: 'tpl-other-01',
-        title: 'Thước Phim Ký Ức',
+        title: 'Ký Ức Đáng Nhớ',
         category: 'other',
         image: 'https://images.pexels.com/photos/1812527/pexels-photo-1812527.jpeg', // Cinematic Silhouette
         previewColor: '#2D2833',
