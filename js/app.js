@@ -413,11 +413,19 @@ async function uploadImageToCloudinary(file) {
 function setupColorPicker() {
     const btns = document.querySelectorAll('.color-btn');
     const container = document.getElementById('preview-container');
+    let lastColorClass = 'bg-[#0F0D11]'; // Default class from create.html
     
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
             const colorClass = btn.getAttribute('data-color');
-            if (container) container.className = `flex-1 relative flex items-center justify-center p-4 lg:p-10 overflow-hidden ${colorClass}`;
+            
+            if (container) {
+                // Safely swap classes
+                container.classList.remove(lastColorClass);
+                container.classList.add(colorClass);
+                lastColorClass = colorClass;
+            }
+            
             currentCardState.theme = colorClass;
         });
     });
