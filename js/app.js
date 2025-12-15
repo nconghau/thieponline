@@ -561,7 +561,21 @@ async function getShortUrl() {
     if (cachedShortUrl) return cachedShortUrl;
     const longUrl = window.location.href;
     
-    // 1. Try da.gd (Ad-free, CORS supported)
+    // 1. Try TinyURL (More reliable/popular)
+    // try {
+    //     const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
+    //     if (response.ok) {
+    //         const text = await response.text();
+    //         if (text && text.startsWith('http')) {
+    //             cachedShortUrl = text.trim();
+    //             return cachedShortUrl;
+    //         }
+    //     }
+    // } catch (e) {
+    //     console.warn("TinyURL failed, trying backup...", e);
+    // }
+
+    // 2. Fallback to da.gd
     try {
         const response = await fetch(`https://da.gd/s?url=${encodeURIComponent(longUrl)}`);
         if (response.ok) {
@@ -575,8 +589,8 @@ async function getShortUrl() {
         console.warn("da.gd failed", e);
     }
 
-    return longUrl; // Final Fallback
-
+    // 3. Fallback to original
+    return longUrl;
 }
 
 function setupSharing() {
