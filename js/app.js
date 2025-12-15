@@ -551,29 +551,78 @@ function initViewer() {
     setupSharing();
 }
 
+let cachedShortUrl = null;
+
+async function getShortUrl() {
+    if (cachedShortUrl) return cachedShortUrl;
+    const longUrl = window.location.href;
+    
+    // 1. Try da.gd (Ad-free, CORS supported)
+    try {
+        const response = await fetch(`https://da.gd/s?url=${encodeURIComponent(longUrl)}`);
+        if (response.ok) {
+            const text = await response.text();
+            if (text && text.startsWith('http')) {
+                cachedShortUrl = text.trim();
+                return cachedShortUrl;
+            }
+        }
+    } catch (e) {
+        console.warn("da.gd failed, falling back to TinyURL", e);
+    }
+
+    // 2. Fallback to TinyURL
+    try {
+        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
+        if (response.ok) {
+            cachedShortUrl = await response.text();
+            return cachedShortUrl;
+        }
+    } catch (e) {
+        console.error("Shortener failed", e);
+    }
+    return longUrl; // Final Fallback
+}
+
 function setupSharing() {
     const btnShare = document.getElementById('btn-share');
     const modal = document.getElementById('share-modal');
     if (!btnShare || !modal) return;
 
-    const url = window.location.href;
+    btnShare.addEventListener('click', async () => {
+        // Show loading state
+        const originalContent = btnShare.innerHTML;
+        btnShare.disabled = true;
+        // Keep dimensions if possible, or just icon
+        btnShare.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        
+        const url = await getShortUrl();
+        
+        // Update Zalo
+        const zaloBtn = document.getElementById('share-zalo');
+        if (zaloBtn) zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
+        
+        // Update Messenger (Mobile Protocol)
+        const fbBtn = document.getElementById('share-fb');
+        if (fbBtn) fbBtn.href = `fb-messenger://share/?link=${encodeURIComponent(url)}`;
 
-    btnShare.addEventListener('click', () => {
+        // Update Copy Button
+        const copyBtn = document.getElementById('share-copy');
+        if (copyBtn) {
+            // Remove old listeners to be safe (cloning node is a trick)
+            const newCopyBtn = copyBtn.cloneNode(true);
+            copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
+            
+            newCopyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Đã sao chép liên kết ngắn: ' + url);
+                });
+            });
+        }
+
+        // Restore button and show modal
+        btnShare.innerHTML = originalContent;
+        btnShare.disabled = false;
         modal.classList.remove('hidden');
     });
-
-    const zaloBtn = document.getElementById('share-zalo');
-    if (zaloBtn) zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
-    
-    const fbBtn = document.getElementById('share-fb');
-    if (fbBtn) fbBtn.href = `fb-messenger://share/?link=${encodeURIComponent(url)}`;
-
-    const copyBtn = document.getElementById('share-copy');
-    if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(url).then(() => {
-                alert('Đã sao chép liên kết!');
-            });
-        });
-    }
 }
