@@ -576,20 +576,11 @@ async function getShortUrl() {
             }
         }
     } catch (e) {
-        console.warn("da.gd failed, falling back to TinyURL", e);
+        console.warn("da.gd failed", e);
     }
 
-    // 2. Fallback to TinyURL
-    try {
-        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
-        if (response.ok) {
-            cachedShortUrl = await response.text();
-            return cachedShortUrl;
-        }
-    } catch (e) {
-        console.error("Shortener failed", e);
-    }
     return longUrl; // Final Fallback
+
 }
 
 function setupSharing() {
