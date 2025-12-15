@@ -42,7 +42,7 @@ function renderTemplates(category) {
                 
                 <!-- Badge -->
                  <div class="absolute top-3 right-3 px-2 py-1 bg-white/10 backdrop-blur-md rounded text-[10px] font-bold text-white border border-white/20 uppercase tracking-wide">
-                    Premium
+                    VIP
                 </div>
 
                 <!-- Hover Action -->

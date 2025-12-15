@@ -1,6 +1,7 @@
 // Mock Data for Templates
 // Using local assets from cinelove.me directories
 const templates = [
+    // Wedding (Thiệp cưới)
     {
         id: 'tpl-wed-01',
         title: 'Wedding Classic',
@@ -18,8 +19,26 @@ const templates = [
         demoUrl: '#'
     },
     {
+        id: 'tpl-wed-03',
+        title: 'Save The Date',
+        category: 'wedding',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/e554cdff-72d4-4657-863a-68cf83b61fe3.webp',
+        previewColor: '#1F1B24',
+        demoUrl: '#'
+    },
+    {
+        id: 'tpl-wed-04',
+        title: 'We Got Married',
+        category: 'wedding',
+        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/c1d49baa-0dd0-4f5c-b9c4-52d02ffe53c0.webp',
+        previewColor: '#000000',
+        demoUrl: '#'
+    },
+
+    // Birthday (Thiệp sinh nhật)
+    {
         id: 'tpl-bday-01',
-        title: 'Sinh Nhật 12',
+        title: 'Sinh Nhật Hồng',
         category: 'birthday',
         image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/5cfab020-67dc-4f23-92c1-0b229244b00f.webp',
         previewColor: '#1F1B24',
@@ -34,33 +53,91 @@ const templates = [
         demoUrl: '#'
     },
     {
-        id: 'tpl-love-01',
-        title: 'We Got Married',
-        category: 'love',
-        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/c1d49baa-0dd0-4f5c-b9c4-52d02ffe53c0.webp',
-        previewColor: '#000000',
-        demoUrl: '#'
-    },
-    {
-        id: 'tpl-love-02',
-        title: 'Love Story',
-        category: 'love',
+        id: 'tpl-bday-03',
+        title: 'Tuổi Mới Rực Rỡ',
+        category: 'birthday',
         image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/c6238e18-d92b-4eea-ba14-3fe832517e62_1762512018.webp',
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
+
+    // Graduation (Thiệp tốt nghiệp)
     {
-        id: 'tpl-wed-03',
-        title: 'Save The Date',
-        category: 'wedding',
+        id: 'tpl-grad-01',
+        title: 'Ngày Ra Trường',
+        category: 'graduation',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/f4b65e20983dd71aa541.webp',
+        previewColor: '#2D2833',
+        demoUrl: '#'
+    },
+    {
+        id: 'tpl-grad-02',
+        title: 'Tương Lai Tươi Sáng',
+        category: 'graduation',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/47b0118b-1f91-4622-8061-f7002f6d5aaf.webp', // Reuse wedding classic for formal look
+        previewColor: '#1F1B24',
+        demoUrl: '#'
+    },
+
+    // Event (Sự kiện)
+    {
+        id: 'tpl-evt-01',
+        title: 'Grand Opening',
+        category: 'event',
         image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/e554cdff-72d4-4657-863a-68cf83b61fe3.webp',
         previewColor: '#1F1B24',
         demoUrl: '#'
     },
     {
-        id: 'tpl-love-03',
+        id: 'tpl-evt-02',
+        title: 'Year End Party',
+        category: 'event',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/5a508f27-c1b9-442f-8a28-2aaf51016367.webp',
+        previewColor: '#2D2833',
+        demoUrl: '#'
+    },
+
+    // Anniversary (Kỷ niệm)
+    {
+        id: 'tpl-ani-01',
+        title: 'Love Story',
+        category: 'anniversary',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/c6238e18-d92b-4eea-ba14-3fe832517e62_1762512018.webp',
+        previewColor: '#1F1B24',
+        demoUrl: '#'
+    },
+    {
+        id: 'tpl-ani-02',
+        title: '1 Năm Bên Nhau',
+        category: 'anniversary',
+        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/c1d49baa-0dd0-4f5c-b9c4-52d02ffe53c0.webp',
+        previewColor: '#000000',
+        demoUrl: '#'
+    },
+
+    // Wishes (Lời chúc)
+    {
+        id: 'tpl-wish-01',
+        title: 'Lời Chúc 8/3',
+        category: 'wishes',
+        image: 'cinelove.me/assets.cinelove.me/pages/featured_thumbnail/5cfab020-67dc-4f23-92c1-0b229244b00f.webp',
+        previewColor: '#1F1B24',
+        demoUrl: '#'
+    },
+    {
+        id: 'tpl-wish-02',
+        title: 'Merry Christmas',
+        category: 'wishes',
+        image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/5a508f27-c1b9-442f-8a28-2aaf51016367.webp',
+        previewColor: '#2D2833',
+        demoUrl: '#'
+    },
+
+    // Other (Khác)
+    {
+        id: 'tpl-other-01',
         title: 'Cinematic Mood',
-        category: 'love',
+        category: 'other',
         image: 'cinelove.me/assets.cinelove.me/templates/long_thumbnail/f4b65e20983dd71aa541.webp',
         previewColor: '#2D2833',
         demoUrl: '#'
