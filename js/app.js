@@ -40,10 +40,6 @@ function renderTemplates(category) {
                 <!-- Overlay Gradient -->
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
                 
-                <!-- Badge -->
-                 <div class="absolute top-3 right-3 px-2 py-1 bg-white/10 backdrop-blur-md rounded text-[10px] font-bold text-white border border-white/20 uppercase tracking-wide">
-                    VIP
-                </div>
 
                 <!-- Hover Action -->
                 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
