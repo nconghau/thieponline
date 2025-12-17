@@ -632,6 +632,95 @@ function initViewer() {
             }
         });
     }
+
+    // Snapshot Logic
+    setupSnapshot();
+}
+
+function setupSnapshot() {
+    const btn = document.getElementById('btn-snapshot');
+    const card = document.getElementById('view-card');
+
+    if (!btn || !card) return;
+
+    btn.addEventListener('click', async () => {
+        // UI Loading
+        const originalContent = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+        // Prepare for capture: Remove clipping constraints
+        const title = document.getElementById('view-title');
+        const msgContainer = document.querySelector('#view-message').parentElement;
+        
+        const originalTitleClass = title ? title.className : '';
+        const originalMsgStyle = msgContainer ? msgContainer.style.overflow : '';
+
+        try {
+            // Wait for fonts
+            await document.fonts.ready;
+
+            if (title) {
+                // Remove clamping and add padding for descenders
+                title.classList.remove('line-clamp-2');
+                title.style.overflow = 'visible';
+                title.style.paddingBottom = '4px'; 
+            }
+            if (msgContainer) {
+                // Ensure message scrollbar doesn't show (though html2canvas usually ignores it, better safe)
+                msgContainer.style.overflow = 'visible'; 
+            }
+
+            // Check if html2canvas is loaded
+            if (typeof html2canvas === 'undefined') {
+                throw new Error('Library not loaded');
+            }
+
+            const canvas = await html2canvas(card, {
+                useCORS: true,
+                scale: 3, // Increased scale for better font rendering
+                backgroundColor: null,
+                logging: false,
+                allowTaint: true,
+                onclone: (clonedDoc) => {
+                    // Extra safety: ensure the cloned nodes also have these styles if needed
+                    // html2canvas modifies the clone, so our pre-modification usually sticks
+                    // But we can double ensure here if needed.
+                }
+            });
+
+            // Trigger Download
+            const link = document.createElement('a');
+            link.download = `thiep-online-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Success feedback
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }, 2000);
+
+        } catch (e) {
+            console.error("Snapshot failed:", e);
+            alert('Lỗi khi lưu ảnh: ' + e.message);
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+        } finally {
+            // Restore styles
+            if (title) {
+                title.className = originalTitleClass;
+                title.style.overflow = '';
+                title.style.paddingBottom = '';
+            }
+            if (msgContainer) {
+                msgContainer.style.overflow = originalMsgStyle;
+            }
+        }
+    });
 }
 
 let cachedShortUrl = null;

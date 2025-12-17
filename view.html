@@ -145,7 +145,7 @@
       class="relative z-10 w-full max-w-md h-full max-h-[90vh] sm:max-h-[850px] p-4 flex flex-col items-center justify-center">
 
       <!-- Card Itself -->
-      <div
+      <div id="view-card"
         class="w-full h-full relative shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden animate-card-up flex flex-col bg-white border-[6px] sm:border-[10px] border-white aspect-auto">
 
         <!-- Card Image (Larger) -->
@@ -191,6 +191,13 @@
           class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-rose-500 text-white flex items-center justify-center hover:shadow-[0_0_20px_rgba(244,114,182,0.5)] transition shadow-lg group"
           title="Chia sẻ">
           <i class="fas fa-share-alt text-lg group-hover:scale-110 transition"></i>
+        </button>
+
+        <!-- Snapshot Button -->
+        <button id="btn-snapshot"
+          class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg group"
+          title="Lưu ảnh">
+          <i class="fas fa-camera text-lg group-hover:scale-110 transition"></i>
         </button>
 
         <!-- Create Button (Secondary with Confirm) -->
@@ -252,6 +259,7 @@
   </div>
 
   <audio id="bg-music" loop></audio>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>
