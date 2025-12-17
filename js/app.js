@@ -18,6 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+const FONT_OPTIONS = [
+    { name: 'Dancing Script', family: '"Dancing Script", cursive', class: 'font-hand' },
+    { name: 'Pacifico', family: '"Pacifico", cursive', class: 'font-[Pacifico]' },
+    { name: 'Great Vibes', family: '"Great Vibes", cursive', class: 'font-["Great_Vibes"]' }, // Tailwind bracket syntax might need quotes or config
+    { name: 'Patrick Hand', family: '"Patrick Hand", cursive', class: 'font-["Patrick_Hand"]' },
+    { name: 'Lora', family: '"Lora", serif', class: 'font-serif' },
+    { name: 'Playfair', family: '"Playfair Display", serif', class: 'font-["Playfair_Display"]' },
+    { name: 'Merriweather', family: '"Merriweather", serif', class: 'font-["Merriweather"]' },
+    { name: 'Inter', family: '"Inter", sans-serif', class: 'font-sans' },
+    { name: 'Montserrat', family: '"Montserrat", sans-serif', class: 'font-["Montserrat"]' },
+    { name: 'Nunito', family: '"Nunito", sans-serif', class: 'font-["Nunito"]' },
+];
+
 // ==========================================
 // HOMEPAGE LOGIC
 // ==========================================
@@ -97,6 +110,7 @@ let currentCardState = {
     message: '',
     music: '',
     theme: 'bg-white',
+    font: 'Dancing Script',
     uploadedImageUrl: ''
 };
 
@@ -124,12 +138,15 @@ function initEditor() {
     
     currentCardState.image = template.image;
     currentCardState.title = template.title;
+    // Default Font
+    currentCardState.font = 'Dancing Script'; // Set default explicitly
 
     // Render Music Options with Preview
     renderMusicOptions();
 
     // Event Listeners
     setupInputs();
+    setupFontSelector();
     setupImageUpload();
     setupColorPicker();
     setupMusicSearch();
@@ -313,6 +330,51 @@ function setupInputs() {
     });
 }
 
+function setupFontSelector() {
+    const container = document.getElementById('font-selector');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    const cardMsg = document.getElementById('card-message');
+
+    FONT_OPTIONS.forEach(font => {
+        const btn = document.createElement('button');
+        // Preview content "Aa"
+        btn.innerText = 'Aa';
+        btn.style.fontFamily = font.family;
+        btn.className = `w-full aspect-square rounded-lg border border-white/10 bg-[#2D2833] text-white hover:bg-white/10 hover:border-primary transition flex items-center justify-center text-xl font-field-btn`;
+        btn.title = font.name;
+        
+        if (font.name === currentCardState.font) {
+            btn.classList.add('border-primary', 'bg-white/10');
+        }
+
+        btn.addEventListener('click', () => {
+             // UI Update
+             document.querySelectorAll('.font-field-btn').forEach(b => {
+                 b.classList.remove('border-primary', 'bg-white/10');
+                 b.classList.add('border-white/10', 'bg-[#2D2833]');
+             });
+             btn.classList.remove('border-white/10', 'bg-[#2D2833]');
+             btn.classList.add('border-primary', 'bg-white/10');
+
+             // State Update
+             currentCardState.font = font.name;
+
+             // Live Preview
+             if (cardMsg) {
+                 cardMsg.style.fontFamily = font.family;
+                 // Remove existing font classes to prevent conflict if needed, 
+                 // but inline style usually overrides classes. 
+                 // Whatever, inline style is safest for dynamic fonts.
+             }
+        });
+
+        container.appendChild(btn);
+    });
+}
+
+
 function setupImageUpload() {
     // The input is triggered by the label now, so we only need to listen for change
     const input = document.getElementById('image-input');
@@ -450,6 +512,7 @@ function generateCard() {
             msg: currentCardState.message,
             music: currentCardState.music,
             theme: currentCardState.theme,
+            font: currentCardState.font,
             img: finalImage // Passing URL now!
         });
 
@@ -470,6 +533,7 @@ function initViewer() {
     const message = params.get('msg') || 'Lời chúc tốt đẹp nhất!';
     const musicUrl = params.get('music');
     const theme = params.get('theme') || 'bg-gray-900';
+    const fontName = params.get('font') || 'Dancing Script';
     let imgSrc = params.get('img');
     const imgId = params.get('imgId');
 
@@ -491,7 +555,12 @@ function initViewer() {
     const imgEl = document.getElementById('view-image');
 
     if (titleEl) titleEl.innerText = title;
-    if (msgEl) msgEl.innerText = message;
+    if (msgEl) {
+        msgEl.innerText = message;
+        // Apply Font
+        const fontObj = FONT_OPTIONS.find(f => f.name === fontName) || FONT_OPTIONS[0];
+        msgEl.style.fontFamily = fontObj.family;
+    }
     if (imgEl) imgEl.src = imgSrc;
     
     // Update Theme Background
@@ -553,6 +622,16 @@ function initViewer() {
 
     // Share Logic
     setupSharing();
+
+    // Create Logic (Confirm)
+    const btnCreate = document.getElementById('btn-create');
+    if (btnCreate) {
+        btnCreate.addEventListener('click', () => {
+            if (confirm('Bạn có muốn tạo một tấm thiệp mới không?')) {
+                window.location.href = 'index.html';
+            }
+        });
+    }
 }
 
 let cachedShortUrl = null;

@@ -20,7 +20,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@700&family=Pacifico&family=Great+Vibes&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
@@ -96,26 +96,34 @@
 
   <!-- Envelope / Start Screen -->
   <div id="envelope"
-    class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#1F1B24] cursor-pointer transition duration-1000 p-4">
+    class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#2D2833] to-slate-900 cursor-pointer transition duration-1000 p-4">
     <div
-      class="relative w-full max-w-xs sm:w-80 h-48 sm:h-56 bg-[#2D2833] rounded-lg shadow-2xl flex items-center justify-center transform transition duration-500 hover:scale-105 envelope-paper border border-white/5">
-      <!-- Flap -->
-      <div
-        class="absolute -top-12 sm:-top-14 left-0 w-0 h-0 border-l-[calc(50vw-2rem)] sm:border-l-[160px] border-l-transparent border-r-[calc(50vw-2rem)] sm:border-r-[160px] border-r-transparent border-b-[96px] sm:border-b-[112px] border-b-[#2D2833] filter brightness-110 drop-shadow-lg pointer-events-none">
-      </div>
+      class="relative w-full max-w-xs sm:w-80 h-48 sm:h-56 bg-gradient-to-br from-[#2a2630] to-[#1a1720] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-center transform transition duration-500 hover:scale-105 envelope-paper border border-white/5 group">
+      <!-- Flap (SVG) -->
+      <svg
+        class="absolute -top-12 sm:-top-14 left-0 w-full h-12 sm:h-14 z-10 filter drop-shadow-xl pointer-events-none origin-bottom transition duration-700 group-hover:rotate-x-180"
+        viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0,100 L50,0 L100,100 Z" fill="#322d39" />
+      </svg>
 
       <!-- Seal -->
       <div
-        class="absolute -top-3 sm:-top-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full wax-seal flex items-center justify-center z-20 border-2 border-[#BE185D]">
-        <span class="font-serif text-white font-bold text-base sm:text-lg">C</span>
+        class="absolute -top-3 sm:-top-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full wax-seal flex items-center justify-center z-20 border-2 border-[#BE185D]/50 shadow-[0_0_20px_rgba(190,24,93,0.6)] animate-pulse group-hover:animate-none group-hover:scale-110 transition">
+        <span class="font-serif text-white font-bold text-lg sm:text-xl drop-shadow-md">❤</span>
       </div>
 
-      <div class="text-3xl animate-bounce mt-8 opacity-50">💌</div>
+      <!-- Hint Icon inside -->
+      <div class="text-4xl animate-bounce mt-12 opacity-0 group-hover:opacity-100 transition duration-700 delay-100">✨
+      </div>
     </div>
-    <p
-      class="mt-12 text-base sm:text-lg font-sans font-light tracking-widest uppercase text-gray-400 animate-pulse text-center">
-      Chạm để mở thiệp
-    </p>
+
+    <div class="mt-12 text-center pointer-events-none">
+      <p class="text-sm sm:text-base font-serif italic text-gray-400 mb-2">Bạn có một tin nhắn mới</p>
+      <p
+        class="text-xl sm:text-2xl font-bold tracking-widest uppercase text-white animate-pulse drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+        Mở Thiệp Ngay
+      </p>
+    </div>
   </div>
 
   <!-- Main Card Container -->
@@ -153,11 +161,11 @@
           <!-- Decorative elements -->
           <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gray-200"></div>
 
-          <h1 id="view-title" class="font-serif text-xl sm:text-3xl text-gray-900 mb-2 tracking-wide line-clamp-2">Tiêu
+          <h1 id="view-title" class="font-serif text-xl sm:text-3xl text-gray-900 mb-2 line-clamp-2">Tiêu
             đề
           </h1>
-          <div class="flex-1 flex items-center justify-center w-full overflow-y-auto">
-            <p id="view-message" class="text-gray-500 text-sm sm:text-lg leading-relaxed font-sans px-2">Nội dung lời
+          <div class="flex-1 flex items-start justify-center w-full overflow-y-auto pt-6">
+            <p id="view-message" class="text-gray-600 text-xl sm:text-2xl leading-relaxed font-sans px-2">Nội dung lời
               chúc</p>
           </div>
 
@@ -172,18 +180,32 @@
       </div>
     </div>
 
-    <!-- Fixed Minimal Actions at Bottom -->
-    <div class="fixed bottom-6 z-30 flex gap-3 opacity-80 hover:opacity-100 transition">
-      <button id="btn-share"
-        class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg"
-        title="Chia sẻ">
-        <i class="fas fa-share-alt"></i>
-      </button>
-      <a href="index.html"
-        class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg"
-        title="Tạo mới">
-        <i class="fas fa-plus"></i>
-      </a>
+    <!-- Fixed Actions & Footer -->
+    <div
+      class="fixed bottom-0 left-0 w-full z-[60] flex flex-col items-center justify-end pb-4 pt-20 bg-gradient-to-t from-[#1F1B24] via-[#1F1B24]/80 to-transparent pointer-events-none">
+
+      <!-- Action Buttons -->
+      <div class="flex gap-4 mb-6 pointer-events-auto">
+        <!-- Share Button (Primary) -->
+        <button id="btn-share"
+          class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-rose-500 text-white flex items-center justify-center hover:shadow-[0_0_20px_rgba(244,114,182,0.5)] transition shadow-lg group"
+          title="Chia sẻ">
+          <i class="fas fa-share-alt text-lg group-hover:scale-110 transition"></i>
+        </button>
+
+        <!-- Create Button (Secondary with Confirm) -->
+        <button id="btn-create"
+          class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg group"
+          title="Tạo mới">
+          <i class="fas fa-plus text-lg group-hover:rotate-90 transition"></i>
+        </button>
+      </div>
+
+      <!-- Minimal Footer -->
+      <div class="text-center pointer-events-auto opacity-50 hover:opacity-100 transition duration-300">
+        <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Made with <span
+            class="text-rose-500 animate-pulse">❤</span> by ThiepOnline</p>
+      </div>
     </div>
 
   </div>
