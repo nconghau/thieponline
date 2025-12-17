@@ -1,5 +1,131 @@
 // App logic for ThiepOnline
 
+const CustomDialog = {
+    el: null,
+    backdrop: null,
+    panel: null,
+    title: null,
+    message: null,
+    actions: null,
+    icon: null,
+    
+    init() {
+        this.el = document.getElementById('custom-dialog');
+        this.backdrop = document.getElementById('dialog-backdrop');
+        this.panel = document.getElementById('dialog-panel');
+        this.title = document.getElementById('dialog-title');
+        this.message = document.getElementById('dialog-message');
+        this.actions = document.getElementById('dialog-actions');
+        this.icon = document.getElementById('dialog-icon');
+        // Icon container for color changing if needed (optional)
+        this.iconContainer = document.getElementById('dialog-icon-container'); 
+    },
+
+    show(msg, titleText = 'Thông Báo', type = 'alert', iconClass = 'fas fa-info') {
+        return new Promise((resolve) => {
+            if (!this.el) this.init();
+            
+            // Content
+            this.title.innerText = titleText;
+            this.message.innerText = msg;
+            this.icon.className = iconClass + ' text-2xl'; // Base size
+            
+            // Adjust colors based on type
+            if (type === 'error') {
+                 this.icon.classList.remove('text-primary');
+                 this.icon.classList.add('text-red-500');
+                 this.iconContainer.classList.remove('bg-primary/10', 'ring-primary/30');
+                 this.iconContainer.classList.add('bg-red-500/10', 'ring-red-500/30');
+            } else {
+                 this.icon.classList.add('text-primary');
+                 this.icon.classList.remove('text-red-500');
+                 this.iconContainer.classList.add('bg-primary/10', 'ring-primary/30');
+                 this.iconContainer.classList.remove('bg-red-500/10', 'ring-red-500/30');
+            }
+
+            // Actions
+            this.actions.innerHTML = '';
+            
+            if (type === 'confirm') {
+                const btnCancel = document.createElement('button');
+                btnCancel.className = 'w-full sm:w-auto px-6 py-2.5 rounded-full border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white transition font-medium';
+                btnCancel.innerText = 'Bỏ qua';
+                btnCancel.onclick = () => {
+                    this.close();
+                    resolve(false);
+                };
+                
+                const btnOk = document.createElement('button');
+                btnOk.className = 'w-full sm:w-auto px-6 py-2.5 rounded-full bg-primary text-white font-bold hover:bg-rose-600 transition shadow-lg shadow-primary/20';
+                btnOk.innerText = 'Đồng ý';
+                btnOk.onclick = () => {
+                    this.close();
+                    resolve(true);
+                };
+                
+                this.actions.appendChild(btnCancel);
+                this.actions.appendChild(btnOk);
+            } else {
+                 const btnOk = document.createElement('button');
+                btnOk.className = 'w-full sm:w-auto px-6 py-2.5 rounded-full bg-primary text-white font-bold hover:bg-rose-600 transition shadow-lg shadow-primary/20';
+                btnOk.innerText = 'Đã hiểu';
+                btnOk.onclick = () => {
+                    this.close();
+                    resolve(true);
+                };
+                this.actions.appendChild(btnOk);
+            }
+
+            // Show
+            this.el.classList.remove('hidden');
+            this.el.classList.add('flex');
+            
+            // Animation Trigger
+            // Small delay to ensure display:flex is applied before opacity transition
+            setTimeout(() => {
+                this.backdrop.classList.remove('opacity-0');
+                this.panel.classList.remove('opacity-0', 'scale-95');
+                this.panel.classList.add('scale-100');
+            }, 10);
+        });
+    },
+
+    close() {
+        this.backdrop.classList.add('opacity-0');
+        this.panel.classList.add('opacity-0', 'scale-95');
+        this.panel.classList.remove('scale-100');
+        
+        setTimeout(() => {
+             this.el.classList.add('hidden');
+             this.el.classList.remove('flex');
+        }, 300);
+    },
+
+    alert(msg, title = 'Thông Báo') {
+        return this.show(msg, title, 'alert', 'fas fa-info-circle');
+    },
+
+    confirm(msg, title = 'Xác Nhận') {
+        return this.show(msg, title, 'confirm', 'fas fa-question-circle');
+    },
+
+    error(msg, title = 'Úi! Đã có lỗi') {
+        return this.show(msg, title, 'error', 'fas fa-exclamation-triangle');
+    }
+};
+
+const MusicController = {
+    unlockAndPlay: function() {
+        const audio = document.getElementById('bg-music');
+        if (audio && audio.src) {
+            audio.play().catch(e => {
+                // Silently fail if interaction is not allowed yet or other issues
+                // console.warn("Audio unlock attempt:", e);
+            });
+        }
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // Detect page by unique elements
     const isHomePage = document.getElementById('template-grid');
@@ -120,15 +246,17 @@ if (window.location.pathname.includes('create.html')) {
 
 function initEditor() {
     if (!tplId) {
-        alert('Không tìm thấy mẫu thiệp! Quay lại trang chủ.');
-        window.location.href = 'index.html';
+        CustomDialog.error('Không tìm thấy mẫu thiệp! Quay lại trang chủ.').then(() => {
+            window.location.href = 'index.html';
+        });
         return;
     }
 
     const template = templates.find(t => t.id === tplId);
     if (!template) {
-        alert('Mẫu không tồn tại!');
-        window.location.href = 'index.html';
+        CustomDialog.error('Mẫu không tồn tại!').then(() => {
+            window.location.href = 'index.html';
+        });
         return;
     }
 
@@ -398,7 +526,7 @@ function setupImageUpload() {
             console.log("File selected:", file.name, "Size:", file.size);
             
             if (file.size > 5 * 1024 * 1024) {
-                alert('File quá lớn! Vui lòng chọn ảnh < 5MB');
+                CustomDialog.error('File tiêu thụ quá lớn! Vui lòng chọn ảnh < 5MB');
                 return;
             }
 
@@ -434,7 +562,7 @@ function setupImageUpload() {
                 console.error("Upload failed details:", error);
                 statusText.innerText = "Lỗi tải ảnh. Thử lại?";
                 icon.className = "fas fa-exclamation-triangle text-3xl text-red-500 mb-3 transition";
-                alert('Lỗi tải ảnh: ' + (error.message || error));
+                CustomDialog.error('Lỗi tải ảnh: ' + (error.message || error));
             } finally {
                 if (saveBtn) {
                     saveBtn.disabled = false;
@@ -626,8 +754,9 @@ function initViewer() {
     // Create Logic (Confirm)
     const btnCreate = document.getElementById('btn-create');
     if (btnCreate) {
-        btnCreate.addEventListener('click', () => {
-            if (confirm('Bạn có muốn tạo một tấm thiệp mới không?')) {
+        btnCreate.addEventListener('click', async () => {
+            const confirmed = await CustomDialog.confirm('Bạn có muốn tạo một tấm thiệp mới không?');
+            if (confirmed) {
                 window.location.href = 'index.html';
             }
         });
@@ -706,7 +835,7 @@ function setupSnapshot() {
 
         } catch (e) {
             console.error("Snapshot failed:", e);
-            alert('Lỗi khi lưu ảnh: ' + e.message);
+            CustomDialog.error('Lỗi khi lưu ảnh: ' + e.message);
             btn.innerHTML = originalContent;
             btn.disabled = false;
         } finally {
