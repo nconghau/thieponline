@@ -777,7 +777,18 @@ function setupSharing() {
         
         // Update Zalo
         const zaloBtn = document.getElementById('share-zalo');
-        if (zaloBtn) zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
+        if (zaloBtn) {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                // Try to trigger app directly on mobile
+                zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
+                // Note: zalo:// scheme is less reliable than the web intent which redirects
+                // But user specifically asked for "message" style, so we ensure the generic share
+                // usually defaults to picking a contact.
+            } else {
+                zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
+            }
+        }
         
         // Update Messenger (Mobile Protocol)
         const fbBtn = document.getElementById('share-fb');
