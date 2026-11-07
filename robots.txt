@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thieponline.surge.sh/sitemap.xml

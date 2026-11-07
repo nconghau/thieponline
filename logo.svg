@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="logo-bg" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF5376"/>
+      <stop offset="50%" stop-color="#E11D48"/>
+      <stop offset="100%" stop-color="#9F1239"/>
+    </linearGradient>
+    <linearGradient id="logo-gold" x1="30" y1="20" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="logo-card" x1="25" y1="25" x2="95" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE4E6"/>
+    </linearGradient>
+    <filter id="logo-shadow" x="-10%" y="-10%" width="130%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#E11D48" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer Rounded Badge -->
+  <rect x="8" y="8" width="104" height="104" rx="28" fill="url(#logo-bg)" filter="url(#logo-shadow)"/>
+  <rect x="8.5" y="8.5" width="103" height="103" rx="27.5" stroke="#FFFFFF" stroke-opacity="0.3"/>
+
+  <!-- Card rising from envelope -->
+  <rect x="32" y="24" width="56" height="42" rx="6" fill="url(#logo-card)"/>
+  
+  <!-- Decorative Text lines on Card -->
+  <rect x="42" y="34" width="36" height="3" rx="1.5" fill="#FDA4AF"/>
+  <rect x="47" y="42" width="26" height="3" rx="1.5" fill="#FECDD3"/>
+
+  <!-- Envelope Body Back Pocket -->
+  <path d="M22 52 L60 78 L98 52 V86 C98 90.4 94.4 94 90 94 H30 C25.6 94 22 90.4 22 86 Z" fill="url(#logo-bg)"/>
+
+  <!-- Envelope Flap Side Folds -->
+  <path d="M22 88 L52 65 L22 52 Z" fill="#BE123C" opacity="0.6"/>
+  <path d="M98 88 L68 65 L98 52 Z" fill="#BE123C" opacity="0.6"/>
+  <path d="M22 92 L60 68 L98 92 C97.5 93.1 96.3 94 95 94 H25 C23.7 94 22.5 93.1 22 92 Z" fill="#881337" opacity="0.5"/>
+
+  <!-- Golden Wax Heart Seal in Center -->
+  <circle cx="60" cy="72" r="14" fill="url(#logo-gold)"/>
+  <path d="M60 76.5 L58.8 75.4 C54.7 71.7 52 69.3 52 66.2 C52 63.7 54 61.8 56.5 61.8 C57.9 61.8 59.3 62.4 60 63.5 C60.7 62.4 62.1 61.8 63.5 61.8 C66 61.8 68 63.7 68 66.2 C68 69.3 65.3 71.7 61.2 75.4 L60 76.5 Z" fill="#FFFFFF"/>
+
+  <!-- Sparkles -->
+  <path d="M88 20 L89.5 25 L94.5 26.5 L89.5 28 L88 33 L86.5 28 L81.5 26.5 L86.5 25 Z" fill="#FDE047"/>
+  <path d="M26 36 L27 39 L30 40 L27 41 L26 44 L25 41 L22 40 L25 39 Z" fill="#FDE047" opacity="0.8"/>
+</svg>
