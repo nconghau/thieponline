@@ -60,5 +60,12 @@ test.describe('Live Production Smoke Tests (thieponline.surge.sh)', () => {
 
     // Verify title in viewer
     await expect(page.locator('#view-title')).toHaveText('Thiệp Mừng Kỷ Niệm 10 Năm');
+
+    // Verify snapshot download on live
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      page.locator('#btn-snapshot').click()
+    ]);
+    expect(download.suggestedFilename()).toMatch(/^thiep-online-.*\.png$/);
   });
 });

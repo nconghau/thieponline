@@ -166,12 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const FONT_OPTIONS = [
     { name: 'Dancing Script', family: '"Dancing Script", cursive', class: 'font-hand' },
     { name: 'Pacifico', family: '"Pacifico", cursive', class: 'font-[Pacifico]' },
-    { name: 'Great Vibes', family: '"Great Vibes", cursive', class: 'font-["Great_Vibes"]' }, // Tailwind bracket syntax might need quotes or config
+    { name: 'Great Vibes', family: '"Great Vibes", cursive', class: 'font-["Great_Vibes"]' },
     { name: 'Patrick Hand', family: '"Patrick Hand", cursive', class: 'font-["Patrick_Hand"]' },
     { name: 'Lora', family: '"Lora", serif', class: 'font-serif' },
     { name: 'Playfair', family: '"Playfair Display", serif', class: 'font-["Playfair_Display"]' },
     { name: 'Merriweather', family: '"Merriweather", serif', class: 'font-["Merriweather"]' },
-    { name: 'Inter', family: '"Inter", sans-serif', class: 'font-sans' },
+    { name: 'Be Vietnam Pro', family: '"Be Vietnam Pro", sans-serif', class: 'font-sans' },
     { name: 'Montserrat', family: '"Montserrat", sans-serif', class: 'font-["Montserrat"]' },
     { name: 'Nunito', family: '"Nunito", sans-serif', class: 'font-["Nunito"]' },
 ];
@@ -1133,7 +1133,8 @@ function generateCard() {
 function initViewer() {
     const params = new URLSearchParams(window.location.search);
     const hashParams = new URLSearchParams(window.location.hash.slice(1));
-    const cardData = hashParams.get('card') ? decodeCardData(hashParams.get('card')) : null;
+    const rawCard = hashParams.get('card') || params.get('card');
+    const cardData = rawCard ? decodeCardData(rawCard) : null;
     
     // Extract Data
     const title = cardData?.t || params.get('title') || 'Chúc Mừng';
@@ -1297,6 +1298,9 @@ function setupSnapshot() {
         const originalTitleClass = title ? title.className : '';
         const originalMsgStyle = msgContainer ? msgContainer.style.overflow : '';
 
+        const originalAnimation = card.style.animation;
+        card.style.animation = 'none';
+
         try {
             // Wait for fonts
             await document.fonts.ready;
@@ -1308,25 +1312,24 @@ function setupSnapshot() {
                 title.style.paddingBottom = '4px'; 
             }
             if (msgContainer) {
-                // Ensure message scrollbar doesn't show (though html2canvas usually ignores it, better safe)
+                // Ensure message scrollbar doesn't show
                 msgContainer.style.overflow = 'visible'; 
             }
 
             // Check if html2canvas is loaded
             if (typeof html2canvas === 'undefined') {
-                throw new Error('Library not loaded');
+                throw new Error('Thư viện tạo ảnh chưa sẵn sàng');
             }
 
             const canvas = await html2canvas(card, {
                 useCORS: true,
-                scale: 3, // Increased scale for better font rendering
+                scale: 2, // 2x resolution is crisp and memory-safe across mobile devices
                 backgroundColor: null,
                 logging: false,
-                allowTaint: true,
+                allowTaint: false,
                 onclone: (clonedDoc) => {
-                    // Extra safety: ensure the cloned nodes also have these styles if needed
-                    // html2canvas modifies the clone, so our pre-modification usually sticks
-                    // But we can double ensure here if needed.
+                    const clonedCard = clonedDoc.getElementById('view-card');
+                    if (clonedCard) clonedCard.style.animation = 'none';
                 }
             });
 
@@ -1347,10 +1350,11 @@ function setupSnapshot() {
 
         } catch (e) {
             console.error("Snapshot failed:", e);
-            CustomDialog.error('Lỗi khi lưu ảnh: ' + e.message);
+            CustomDialog.error('Không thể xuất ảnh: ' + (e.message || 'Lỗi xử lý'));
             btn.innerHTML = originalContent;
             btn.disabled = false;
         } finally {
+            card.style.animation = originalAnimation;
             // Restore styles
             if (title) {
                 title.className = originalTitleClass;
@@ -1418,13 +1422,10 @@ function setupSharing() {
             zaloBtn.href = `https://zalo.me/share?url=${encodeURIComponent(url)}`;
         }
         
-        // Update Messenger (Mobile Protocol)
+        // Update Facebook Share
         const fbBtn = document.getElementById('share-fb');
         if (fbBtn) {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            fbBtn.href = isMobile
-                ? `fb-messenger://share/?link=${encodeURIComponent(url)}`
-                : `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         }
 
         // Update Copy Button

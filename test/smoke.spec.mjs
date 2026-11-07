@@ -174,6 +174,13 @@ test.describe('ThiepOnline Smoke Tests', () => {
     // Cancel
     await page.locator('#dialog-actions button:has-text("Bỏ qua")').click();
     await expect(dialog).toBeHidden();
+
+    // 6. Snapshot button triggers PNG download without error
+    const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        page.locator('#btn-snapshot').click()
+    ]);
+    expect(download.suggestedFilename()).toMatch(/^thiep-online-.*\.png$/);
   });
 
   test('404 Page: friendly error display and navigation back to home', async ({ page }) => {
