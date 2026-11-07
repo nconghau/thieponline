@@ -10,6 +10,8 @@
     <meta name="keywords"
         content="tạo thiệp online, thiệp cưới online, làm thiệp sinh nhật, thiệp điện tử, thiệp mời online miễn phí">
     <meta name="author" content="ThiepOnline">
+    <meta name="theme-color" content="#1F1B24">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -156,39 +158,52 @@
     <!-- Templates Gallery -->
     <div id="templates" class="py-12 lg:py-24 bg-[#18151D]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-8 lg:mb-12 gap-6">
-                <div>
-                    <h2 class="text-2xl lg:text-3xl font-bold text-white mb-2">Mẫu Thiết Kế Phổ Biến</h2>
-                    <p class="text-gray-400 text-sm lg:text-base">Các mẫu trending được yêu thích nhất tháng này</p>
+            <div class="space-y-6 mb-8 lg:mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div>
+                        <h2 class="text-2xl lg:text-3xl font-bold text-white mb-2">Mẫu Thiết Kế Phổ Biến</h2>
+                        <p class="text-gray-400 text-sm lg:text-base">Hơn 30+ mẫu thiệp đa dạng phong cách, bố cục & dịp lễ</p>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="w-full md:w-80 relative">
+                        <input type="text" id="template-search"
+                            placeholder="Tìm kiếm mẫu thiệp (cưới, sinh nhật, tết, gala...)"
+                            class="w-full pl-10 pr-4 py-2.5 bg-[#2D2833] border border-white/10 rounded-full text-white text-xs sm:text-sm placeholder-gray-400 focus:outline-none focus:border-primary transition shadow-inner">
+                        <i class="fas fa-search absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs sm:text-sm"></i>
+                    </div>
                 </div>
 
-                <!-- Filter tabs -->
-                <div class="w-full md:w-auto flex gap-3 overflow-x-auto pb-2 no-scrollbar bg-white/5 p-2 rounded-xl backdrop-blur-sm"
-                    id="category-filters">
-                    <button
-                        class="px-4 py-2 rounded-lg bg-primary text-white font-medium text-xs sm:text-sm whitespace-nowrap active-category transition shadow-lg shrink-0"
-                        data-cat="all">Tất cả</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="wedding">Thiệp cưới</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="birthday">Thiệp sinh nhật</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="graduation">Thiệp tốt nghiệp</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="event">Sự kiện</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="anniversary">Kỷ niệm</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="wishes">Lời chúc</button>
-                    <button
-                        class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
-                        data-cat="other">Khác</button>
+                <!-- Filter tabs & Counter -->
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="w-full md:w-auto flex gap-2.5 overflow-x-auto pb-2 no-scrollbar bg-white/5 p-1.5 rounded-xl backdrop-blur-sm"
+                        id="category-filters">
+                        <button
+                            class="px-4 py-2 rounded-lg bg-primary text-white font-medium text-xs sm:text-sm whitespace-nowrap active-category transition shadow-lg shrink-0"
+                            data-cat="all">Tất cả</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="wedding">Thiệp cưới</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="birthday">Thiệp sinh nhật</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="graduation">Thiệp tốt nghiệp</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="event">Sự kiện</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="anniversary">Kỷ niệm</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="wishes">Lời chúc & Lễ</button>
+                        <button
+                            class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm whitespace-nowrap transition shrink-0"
+                            data-cat="other">Khác</button>
+                    </div>
+                    <span id="template-count" class="text-xs text-gray-400 font-medium">Hiển thị 31 mẫu</span>
                 </div>
             </div>
 
@@ -197,12 +212,6 @@
                 <!-- Content injected via JS -->
             </div>
 
-            <div class="text-center mt-16">
-                <button
-                    class="px-8 py-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition text-sm font-medium">
-                    Xem Thêm Mẫu Thiệp
-                </button>
-            </div>
         </div>
     </div>
 

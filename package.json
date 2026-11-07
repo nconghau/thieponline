@@ -1,0 +1,24 @@
+{
+  "name": "thieponline",
+  "version": "1.0.0",
+  "description": "![ThiepOnline Banner](https://res.cloudinary.com/dkeupjars/image/upload/v1765819118/other_project/thieponline-banner-02_mii6ax.png)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "deploy": "./deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-nconghau:nconghau/thieponline.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0"
+  }
+}

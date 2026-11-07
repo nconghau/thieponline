@@ -1,0 +1,14 @@
+node_modules
+.git
+.gitignore
+.surgeignore
+.DS_Store
+.playwright-cli
+test
+test-results
+playwright-report
+playwright.config.mjs
+package.json
+package-lock.json
+README.md
+LICENSE

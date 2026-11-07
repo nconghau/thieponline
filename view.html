@@ -7,16 +7,24 @@
   <title>Bạn Có Một Tấm Thiệp Mới - ThiepOnline</title>
   <meta name="description"
     content="Nhấn để mở tấm thiệp đặc biệt dành riêng cho bạn. Trải nghiệm khoảnh khắc đầy cảm xúc.">
+  <meta name="theme-color" content="#1F1B24">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Bạn Có Một Tấm Thiệp Mới - ThiepOnline">
-  <meta property="og:description" content="Nhấn để mở tấm thiệp đặc biệt dành riêng cho bạn.">
+  <meta id="og-title" property="og:title" content="Bạn Có Một Tấm Thiệp Mới - ThiepOnline">
+  <meta id="og-description" property="og:description" content="Nhấn để mở tấm thiệp đặc biệt dành riêng cho bạn.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://thieponline.surge.sh/view.html">
   <meta property="og:image"
     content="https://res.cloudinary.com/dkeupjars/image/upload/v1765819118/other_project/thieponline-banner-02_mii6ax.png">
   <link rel="canonical" href="https://thieponline.surge.sh/view.html">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://images.pexels.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://res.cloudinary.com">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link
@@ -95,7 +103,7 @@
   </script>
 
   <!-- Envelope / Start Screen -->
-  <div id="envelope"
+  <div id="envelope" role="button" tabindex="0" aria-label="Mở thiệp"
     class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#2D2833] to-slate-900 cursor-pointer transition duration-1000 p-4">
     <div
       class="relative w-full max-w-xs sm:w-80 h-48 sm:h-56 bg-gradient-to-br from-[#2a2630] to-[#1a1720] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-center transform transition duration-500 hover:scale-105 envelope-paper border border-white/5 group">
@@ -149,27 +157,27 @@
         class="w-full h-full relative shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden animate-card-up flex flex-col bg-white border-[6px] sm:border-[10px] border-white aspect-auto">
 
         <!-- Card Image (Larger) -->
-        <div class="h-[60%] sm:h-[65%] w-full relative overflow-hidden bg-gray-200 group">
+        <div id="view-image-wrapper" class="h-[60%] sm:h-[65%] w-full relative overflow-hidden bg-gray-200 group transition-all duration-500">
           <img id="view-image" src="" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105"
             alt="Card Image">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div id="view-image-gradient" class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         </div>
 
         <!-- Card Content -->
-        <div
-          class="h-[40%] sm:h-[35%] p-4 sm:p-6 flex flex-col items-center justify-center text-center bg-white text-gray-900 relative">
+        <div id="view-content-layer"
+          class="h-[40%] sm:h-[35%] p-4 sm:p-6 flex flex-col items-center justify-center text-center bg-white text-gray-900 relative transition-colors duration-500">
           <!-- Decorative elements -->
-          <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gray-200"></div>
+          <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gray-200/60"></div>
 
-          <h1 id="view-title" class="font-serif text-xl sm:text-3xl text-gray-900 mb-2 line-clamp-2">Tiêu
+          <h1 id="view-title" class="font-serif text-xl sm:text-3xl font-bold text-gray-900 mb-2 line-clamp-2 transition-colors duration-500">Tiêu
             đề
           </h1>
-          <div class="flex-1 flex items-start justify-center w-full overflow-y-auto pt-6">
-            <p id="view-message" class="text-gray-600 text-xl sm:text-2xl leading-relaxed font-sans px-2">Nội dung lời
+          <div class="flex-1 flex items-start justify-center w-full overflow-y-auto pt-4">
+            <p id="view-message" class="text-gray-600 text-xl sm:text-2xl leading-relaxed font-sans px-2 transition-colors duration-500">Nội dung lời
               chúc</p>
           </div>
 
-          <div class="mt-auto w-10 h-0.5 bg-gray-200"></div>
+          <div class="mt-auto w-10 h-0.5 bg-gray-200/60"></div>
         </div>
       </div>
 
@@ -187,21 +195,21 @@
       <!-- Action Buttons -->
       <div class="flex gap-4 mb-6 pointer-events-auto">
         <!-- Share Button (Primary) -->
-        <button id="btn-share"
+        <button id="btn-share" aria-label="Chia sẻ thiệp"
           class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-rose-500 text-white flex items-center justify-center hover:shadow-[0_0_20px_rgba(244,114,182,0.5)] transition shadow-lg group"
           title="Chia sẻ">
           <i class="fas fa-share-alt text-lg group-hover:scale-110 transition"></i>
         </button>
 
         <!-- Snapshot Button -->
-        <button id="btn-snapshot"
+        <button id="btn-snapshot" aria-label="Lưu thiệp thành ảnh"
           class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg group"
           title="Lưu ảnh">
           <i class="fas fa-camera text-lg group-hover:scale-110 transition"></i>
         </button>
 
         <!-- Create Button (Secondary with Confirm) -->
-        <button id="btn-create"
+        <button id="btn-create" aria-label="Tạo thiệp mới"
           class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-gray-900 transition shadow-lg group"
           title="Tạo mới">
           <i class="fas fa-plus text-lg group-hover:rotate-90 transition"></i>
@@ -218,12 +226,10 @@
   </div>
 
   <!-- Float Music Toggle -->
-  <button id="music-toggle"
+  <button id="music-toggle" aria-label="Bật hoặc tắt nhạc nền"
     class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-black/30 backdrop-blur-md rounded-full text-white flex items-center justify-center hover:bg-black/50 transition border border-white/10 z-50">
     <i class="fas fa-volume-up text-sm sm:text-base"></i>
   </button>
-
-  </div>
 
   <!-- Social Share Modal -->
   <div id="share-modal"
@@ -231,13 +237,13 @@
     <div
       class="bg-[#2D2833] border border-white/10 rounded-2xl p-6 sm:p-8 w-full max-w-sm text-center shadow-2xl transform scale-100 transition">
       <h3 class="text-xl font-bold text-white mb-6 font-serif">Chia sẻ yêu thương</h3>
-      <div class="grid grid-cols-3 gap-6 mb-8">
+      <div class="grid grid-cols-3 gap-6 mb-6">
         <a href="#" id="share-fb" target="_blank" class="flex flex-col items-center gap-2 group">
           <div
             class="w-12 h-12 sm:w-14 sm:h-14 bg-[#3B5998] rounded-full flex items-center justify-center text-xl sm:text-2xl text-white shadow-lg group-hover:scale-110 transition">
-            <i class="fab fa-facebook-messenger"></i>
+            <i class="fab fa-facebook-f"></i>
           </div>
-          <span class="text-xs text-gray-400 group-hover:text-white transition">Messenger</span>
+          <span class="text-xs text-gray-400 group-hover:text-white transition">Facebook</span>
         </a>
         <a href="#" id="share-zalo" target="_blank" class="flex flex-col items-center gap-2 group">
           <div
@@ -253,6 +259,15 @@
           <span class="text-xs text-gray-400 group-hover:text-white transition">Copy Link</span>
         </button>
       </div>
+
+      <!-- QR Code Section -->
+      <div class="mb-6 pt-5 border-t border-white/10 flex flex-col items-center">
+        <p class="text-xs text-gray-400 mb-3 font-medium">Quét mã QR để mở thiệp trên điện thoại</p>
+        <div class="w-36 h-36 bg-white p-2 rounded-xl shadow-lg flex items-center justify-center">
+          <img id="share-qr-img" src="" alt="Mã QR mở thiệp" class="w-full h-full object-contain">
+        </div>
+      </div>
+
       <button onclick="document.getElementById('share-modal').classList.add('hidden')"
         class="w-full py-3 bg-white/5 border border-white/10 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-white/10 transition">Đóng</button>
     </div>

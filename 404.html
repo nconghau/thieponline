@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Không Tìm Thấy Trang - ThiepOnline</title>
+  <meta name="description" content="Trang hoặc tấm thiệp bạn đang tìm kiếm không tồn tại hoặc liên kết đã thay đổi.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#1F1B24">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Lora', 'serif'],
+            hand: ['"Dancing Script"', 'cursive'],
+          },
+          colors: {
+            background: '#1F1B24',
+            surface: '#2D2833',
+            primary: '#F472B6',
+            secondary: '#FB7185',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-[#1F1B24] text-gray-100 min-h-screen flex flex-col justify-between font-sans selection:bg-primary selection:text-white">
+
+  <!-- Navbar -->
+  <nav class="bg-[#1F1B24]/90 backdrop-blur-md border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <span class="text-2xl sm:text-3xl text-primary transform group-hover:scale-110 transition duration-300">💌</span>
+          <span class="font-serif font-bold text-xl sm:text-2xl tracking-wider text-white">ThiepOnline</span>
+        </a>
+        <a href="index.html#templates"
+          class="bg-gradient-to-r from-primary to-rose-500 hover:from-primary/90 hover:to-rose-500/90 text-white px-5 sm:px-6 py-2 rounded-full font-medium text-xs sm:text-sm shadow-lg shadow-primary/20 transition duration-300">
+          Tạo Thiệp Ngay
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 404 Hero -->
+  <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+    <!-- Ambient Blur -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-rose-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-lg w-full text-center relative z-10 bg-[#2D2833]/60 border border-white/10 rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-2xl">
+      <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-4xl sm:text-5xl text-primary mb-6 shadow-inner animate-pulse">
+        ✉️
+      </div>
+
+      <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-primary mb-2">Lỗi 404</p>
+      <h1 class="text-2xl sm:text-3xl font-serif font-bold text-white mb-4">Không Tìm Thấy Trang</h1>
+      <p class="text-sm sm:text-base text-gray-300 leading-relaxed mb-8">
+        Tấm thiệp hoặc trang bạn đang tìm kiếm có thể đã bị di chuyển, xóa hoặc liên kết không chính xác.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="index.html"
+          class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white font-medium text-sm transition flex items-center justify-center gap-2">
+          <i class="fas fa-home text-xs"></i>
+          <span>Về Trang Chủ</span>
+        </a>
+        <a href="index.html#templates"
+          class="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-rose-500 hover:from-primary/90 hover:to-rose-500/90 text-white font-semibold text-sm shadow-lg shadow-primary/20 transition flex items-center justify-center gap-2">
+          <span>Chọn Mẫu Thiệp Mới</span>
+          <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-6 text-center text-xs text-gray-500">
+    <p>© 2026 ThiepOnline. Lan tỏa yêu thương trong từng khoảnh khắc.</p>
+  </footer>
+
+</body>
+
+</html>
